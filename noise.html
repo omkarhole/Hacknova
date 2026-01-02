@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore noise pollution data through interactive 3D visualizations. Understand the impact of urban sound on health and environment.">
     <title>Noise Pollution - EcoPulse</title>
-    
+        <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
     <!-- Fonts and Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -42,7 +43,19 @@
                 </button>
             </div>
         </div>
+          <div id="mobile-menu" class="md:hidden hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block py-2 hover:text-eco-blue transition-colors">Home</a>
+                <a href="air.html" class="block py-2 hover:text-eco-red transition-colors">Air Pollution</a>
+                <a href="water.html" class="block py-2 hover:text-eco-blue transition-colors">Water Pollution</a>
+                <a href="light.html" class="block py-2 text-eco-orange font-medium">Light Pollution</a>
+                <a href="noise.html" class="block py-2 hover:text-eco-purple transition-colors">Noise Pollution</a>
+                <a href="ai-prediction.html" class="block py-2 hover:text-purple-400 transition-colors">AI Prediction</a>
+                <a href="presentation.html" class="block py-2 hover:text-eco-green transition-colors">Demo</a>
+            </div>
+        </div>
     </nav>
+    
 
     <!-- Main Content -->
     <main class="pt-16">
@@ -372,6 +385,18 @@
   // Initial check
   toggleScrollButton()
 })()
+
+ document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (!menuBtn || !mobileMenu) return;
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  });
 </script>
 </body>
 </html>
+
