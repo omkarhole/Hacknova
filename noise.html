@@ -42,7 +42,19 @@
                 </button>
             </div>
         </div>
+          <div id="mobile-menu" class="md:hidden hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block py-2 hover:text-eco-blue transition-colors">Home</a>
+                <a href="air.html" class="block py-2 hover:text-eco-red transition-colors">Air Pollution</a>
+                <a href="water.html" class="block py-2 hover:text-eco-blue transition-colors">Water Pollution</a>
+                <a href="light.html" class="block py-2 text-eco-orange font-medium">Light Pollution</a>
+                <a href="noise.html" class="block py-2 hover:text-eco-purple transition-colors">Noise Pollution</a>
+                <a href="ai-prediction.html" class="block py-2 hover:text-purple-400 transition-colors">AI Prediction</a>
+                <a href="presentation.html" class="block py-2 hover:text-eco-green transition-colors">Demo</a>
+            </div>
+        </div>
     </nav>
+    
 
     <!-- Main Content -->
     <main class="pt-16">
@@ -372,6 +384,17 @@
   // Initial check
   toggleScrollButton()
 })()
+
+ document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (!menuBtn || !mobileMenu) return;
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  });
 </script>
 </body>
 </html>

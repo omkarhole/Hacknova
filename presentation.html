@@ -492,6 +492,17 @@
         }
 
         new PresentationController();
+
+         document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (!menuBtn || !mobileMenu) return;
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  });
     </script>
 </body>
 </html>
