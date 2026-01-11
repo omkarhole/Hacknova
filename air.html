@@ -47,6 +47,45 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(75, 85, 99, 0.5);
         }
+        /* Improved, cross-browser slider styling for the air quality control */
+        #air-pollution-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(249,115,22,1) 52%, rgba(55,65,81,1) 52%);
+            outline: none;
+            transition: background 0.15s linear;
+        }
+
+        /* WebKit thumb */
+        #air-pollution-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fb923c; /* eco-orange */
+            border: 3px solid rgba(17,24,39,0.9);
+            box-shadow: 0 4px 10px rgba(251,146,60,0.25);
+            margin-top: -4px; /* vertically center */
+            cursor: pointer;
+        }
+
+        /* Firefox thumb */
+        #air-pollution-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fb923c;
+            border: 3px solid rgba(17,24,39,0.9);
+            box-shadow: 0 4px 10px rgba(251,146,60,0.25);
+            cursor: pointer;
+        }
+
+        /* Remove default focus outline and provide subtle ring */
+        #air-pollution-slider:focus {
+            box-shadow: 0 0 0 6px rgba(251,146,60,0.08);
+        }
     </style>
 </head>
 
@@ -366,6 +405,36 @@
                     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                     airObserver.observe(el);
                 });
+            }
+            // Slider UI enhancements: update track fill and label dynamically
+            const slider = document.getElementById('air-pollution-slider');
+            const label = document.getElementById('air-pollution-value');
+            if (slider) {
+                const updateSlider = () => {
+                    const val = Number(slider.value);
+                    const min = Number(slider.min || 0);
+                    const max = Number(slider.max || 100);
+                    const pct = ((val - min) / (max - min)) * 100;
+                    slider.style.background = `linear-gradient(90deg, rgba(251,146,60,1) ${pct}%, rgba(55,65,81,1) ${pct}%)`;
+
+                    if (label) {
+                        let text = `${val} AQI`;
+                        if (val < 50) text = `Good (${val} AQI)`;
+                        else if (val < 100) text = `Moderate (${val} AQI)`;
+                        else if (val < 150) text = `Unhealthy for sensitive groups (${val} AQI)`;
+                        else if (val < 200) text = `Unhealthy (${val} AQI)`;
+                        else if (val < 300) text = `Very Unhealthy (${val} AQI)`;
+                        else text = `Hazardous (${val} AQI)`;
+                        label.textContent = text;
+
+                        const fg = val < 50 ? '#10B981' : val < 100 ? '#3B82F6' : val < 150 ? '#F97316' : val < 200 ? '#F59E0B' : val < 300 ? '#EF4444' : '#7f1d1d';
+                        label.style.color = fg;
+                    }
+                };
+
+                slider.addEventListener('input', updateSlider, { passive: true });
+                // initialize
+                updateSlider();
             }
         });
     </script>
